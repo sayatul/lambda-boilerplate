@@ -1,0 +1,21 @@
+#### Install any Python binary dependency in AWS lambda
+
+In this example, we have the following source directory structure:
+
+```
+├── Dockerfile
+├── requirements.txt
+├── src
+│   ├── test.py
+```
+
+To build your zip file, just type:
+```
+docker build -t my-lambda .
+```
+
+Getting the zip file out, takes a little bit of Docker foo:
+```
+ID=$(docker create my-lambda /bin/true)		# create a container from the image
+docker cp $ID:/ .				# copy the file from the /
+```
